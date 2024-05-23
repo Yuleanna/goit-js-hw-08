@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gallery</title>
+    <style>
+      .gallery {
+        list-style-type: none;
+        display: flex;
+        flex-wrap: wrap;
+      }
+      .gallery-item {
+        margin: 10px;
+      }
+      .gallery-link {
+        text-decoration: none;
+      }
+      .gallery-image {
+        width: 150px;
+        height: auto;
+      }
+    </style>
+    <link
+      href="
+https://cdn.jsdelivr.net/npm/basiclightbox@5.0.4/dist/basicLightbox.min.css
+"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <ul class="gallery">
+      <li class="gallery-item">
+        <a class="gallery-link" href="large-image.jpg">
+          <img
+            class="gallery-image"
+            src="small-image.jpg"
+            data-source="large-image.jpg"
+            alt="Image description"
+          />
+        </a>
+      </li>
+    </ul>
+    <script>
+        const galleryContainer = document.querySelector(".gallery");
+
+        const galleryMarkup = images
+          .map(({ preview, original, description }) => {
+            return `<li class = "gallery-item">
+      <a class = "gallery-link" href = "${original}">
+      <img class = "gallery-image" src = "${preview}"
+      data-source = "${original}"
+      alt = "${description}"
+      />
+      </a>
+          </li>`;
+          })
+          .join("");
+
+        galleryContainer.innerHTML = galleryMarkup;
+
+        galleryContainer.addEventListener('click', (event) => {
+          event.preventDefault();
+
+          If (event.target.classList.contains ('gallery-image')) {
+              const largeImageURL =
+              event.target.dataset.source;
+
+
+              const instance =
+              basicLightbox.create(` <div class="modal">
+                 <img src="${largeImageURL}" width ="800" height="600">
+                 </div>
+
+                 `);
+              instance.show();
+          }
+        });
+    </script>
+    <script src="
+https://cdn.jsdelivr.net/npm/basiclightbox@5.0.4/dist/basicLightbox.min.js
+"></script>
+    <script></script>
+  </body>
+</html>
